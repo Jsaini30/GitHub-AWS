@@ -24,10 +24,8 @@ jobs:
       - name: multiple command
         uses: appleboy/ssh-action@v1.0.1
         with:
-          host: ${{ vars.VM_IP }}
+          host: ${{ vars.IP }}
           username: ${{ vars.USERNAME }}
           key: ${{ vars.SSH_KEY_NORMAL }}
           port: "22"
-          script: |
-            whoami
-            ls -al
+          script: "./script.sh"
