@@ -18,12 +18,12 @@ jobs:
         mkdir -p $HOME/.ssh
         echo "${{ vars.SSH_KEY_NORMAL }}" > $HOME/.ssh/id_rsa
         chmod 600 $HOME/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.LINUX_VM_IP }} >> $HOME/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.VM_IP }} >> $HOME/.ssh/known_hosts
 
     - name: Copy Files to Linux VM
       run: |
         # Variables
-        USERNAME="${{ secrets.LINUX_VM_USERNAME }}"
+        USERNAME="${{ secrets.USERNAME }}"
         LINUX_VM_IP="${{ vars.VM_IP }}"
         LOCAL_FILE_PATH="C:/Users/admin/Documents/index.html"
         REMOTE_DIRECTORY="/home/ubuntu"
