@@ -20,4 +20,4 @@ jobs:
           username: ${{ vars.USERNAME }}
           key: ${{ vars.SSH_KEY_NORMAL }}
           source: "./index.html"
-          target: "/home/ubuntu"
+          target: "/var/www/html/"
