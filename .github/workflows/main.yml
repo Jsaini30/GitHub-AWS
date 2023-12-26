@@ -28,4 +28,4 @@ jobs:
           username: ${{ vars.USERNAME }}
           key: ${{ vars.SSH_KEY_NORMAL }}
           port: "22"
-          script: "home/ubuntu/startup.sh"
+          script: "./startup.sh"
