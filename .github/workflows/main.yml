@@ -1,0 +1,16 @@
+name: Copy Data to Linux VM
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  copy_data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    
