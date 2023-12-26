@@ -18,15 +18,17 @@ jobs:
         mkdir -p $HOME/.ssh
         echo "${{ vars.SSH_KEY_NORMAL }}" > $HOME/.ssh/id_rsa
         chmod 600 $HOME/.ssh/id_rsa
-        ssh-keyscan -H ${{ vars.VM_IP }} >> $HOME/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.LINUX_VM_IP }} >> $HOME/.ssh/known_hosts
 
     - name: Copy Files to Linux VM
       run: |
         # Variables
-        USERNAME="${{ vars.USERNAME }}"
+        USERNAME="${{ secrets.LINUX_VM_USERNAME }}"
         LINUX_VM_IP="${{ vars.VM_IP }}"
         LOCAL_FILE_PATH="C:/Users/admin/Documents/index.html"
         REMOTE_DIRECTORY="/home/ubuntu"
+        
+        LOCAL_FILE_PATH=$(wsl wslpath -a "$LOCAL_FILE_PATH")
 
         # Copy file using scp
         scp -i $HOME/.ssh/id_rsa "$LOCAL_FILE_PATH" "$USERNAME"@"$LINUX_VM_IP":"$REMOTE_DIRECTORY"
