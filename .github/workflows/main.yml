@@ -25,7 +25,7 @@ jobs:
         # Variables
         USERNAME="${{ vars.USERNAME }}"
         LINUX_VM_IP="${{ vars.VM_IP }}"
-        LOCAL_FILE_PATH="/var/www/html/"
+        LOCAL_FILE_PATH="/home/ubuntu/"
         REMOTE_DIRECTORY="./index.html"
 
         # Copy file using scp
