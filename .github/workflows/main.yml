@@ -25,10 +25,8 @@ jobs:
         # Variables
         USERNAME="${{ vars.USERNAME }}"
         LINUX_VM_IP="${{ vars.VM_IP }}"
-        LOCAL_FILE_PATH="C:/Users/admin/Documents/index.html"
-        REMOTE_DIRECTORY="/home/ubuntu"
-        
-        LOCAL_FILE_PATH=$(wsl wslpath -a "$LOCAL_FILE_PATH")
+        LOCAL_FILE_PATH="/var/www/html/"
+        REMOTE_DIRECTORY="./index.html"
 
         # Copy file using scp
         scp -i $HOME/.ssh/id_rsa "$LOCAL_FILE_PATH" "$USERNAME"@"$LINUX_VM_IP":"$REMOTE_DIRECTORY"
