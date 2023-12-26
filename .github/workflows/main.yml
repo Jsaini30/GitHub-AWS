@@ -1,32 +1,23 @@
-name: Copy Files to Linux VM
+name: Copy Data to VM
 
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow on
+      - main
 
 jobs:
-  copy-files:
+  copy-data:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up SSH
-      run: |
-        mkdir -p $HOME/.ssh
-        echo "${{ vars.SSH_KEY_NORMAL }}" > $HOME/.ssh/id_rsa
-        chmod 600 $HOME/.ssh/id_rsa
-        ssh-keyscan -H ${{ vars.VM_IP }} >> $HOME/.ssh/known_hosts
-
-    - name: Copy Files to Linux VM
-      run: |
-        # Variables
-        USERNAME="${{ vars.USERNAME }}"
-        LINUX_VM_IP="${{ vars.VM_IP }}"
-        LOCAL_FILE_PATH="/home/ubuntu/"
-        REMOTE_DIRECTORY="./index.html"
-
-        # Copy file using scp
-        scp -i $HOME/.ssh/id_rsa "$LOCAL_FILE_PATH" "$USERNAME"@"$LINUX_VM_IP":"$REMOTE_DIRECTORY"
+      - name: Copy Data to VM
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.VM_IP }}
+          username: ${{ vars.USERNAME }}
+          key: ${{ vars.SSH_KEY_NORMAL }}
+          source: "./index.html"
+          target: "/home/ubuntu"
